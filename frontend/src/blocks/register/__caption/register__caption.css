@@ -1,0 +1,17 @@
+.register__caption {
+  text-decoration: none;
+  color: white;
+  font-family: inherit;
+  font-size: 14px;
+  line-height: 17px;
+  font-weight: 400;
+  margin-top: 15px;
+}
+
+@media screen and (max-width: 600px) {
+  .register__input {
+    width: 260px;
+    font-size: 14px;
+    line-height: 17px;
+  }
+}

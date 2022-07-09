@@ -1,0 +1,15 @@
+.card__basket {
+  display: block;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 18px;
+  height: 19px;
+  background: none;
+  background-image: url(../../../images/basket.svg);
+  background-repeat: no-repeat;
+  padding: 0;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}

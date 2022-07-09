@@ -1,0 +1,22 @@
+.register__submit {
+  width: 358px;
+  height: 50px;
+  background-color: white;
+  color: black;
+  font-size: 18px;
+  line-height: 18px;
+  font-weight: 400;
+  border: none;
+  font-family: inherit;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 600px) {
+  .register__submit {
+    width: 260px;
+    height: 46px;
+    font-size: 16px;
+    line-height: 19px;
+  }
+}

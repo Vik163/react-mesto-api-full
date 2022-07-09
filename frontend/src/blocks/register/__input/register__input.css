@@ -1,0 +1,36 @@
+.register__input {
+  width: 358px;
+  background-color: black;
+  color: white;
+  padding: 0 0 10px;
+  border: none;
+  border-bottom: 2px solid white;
+  font-family: inherit;
+  font-size: 14px;
+  line-height: 14px;
+  font-weight: 400;
+  outline: none;
+  margin-bottom: 30px;
+}
+
+.register__input:last-of-type {
+  margin-bottom: 216px;
+}
+
+.register__input::placeholder {
+  color: white;
+}
+
+.register__input:-webkit-autofill {
+  box-shadow: inset 0 0 0 1000px black;
+  -webkit-text-fill-color: white !important;
+  color: white !important;
+}
+
+@media screen and (max-width: 600px) {
+  .register__input {
+    width: 260px;
+    font-size: 14px;
+    line-height: 17px;
+  }
+}
