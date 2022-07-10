@@ -45,6 +45,7 @@ class Auth {
         "Content-Type": "application/json",
         authorization: `Bearer ${jwt}`,
       },
+      credentials: 'include',
     }).then(this._checkResponse);
   }
 }

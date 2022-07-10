@@ -16,6 +16,7 @@ class Api {
       headers: {
         authorization: `${this._settings.headers.authorization}`,
       },
+      credentials: 'include',
     }).then(this._checkResponse);
   }
 
@@ -24,6 +25,7 @@ class Api {
       headers: {
         authorization: `${this._settings.headers.authorization}`,
       },
+      credentials: 'include',
     }).then(this._checkResponse);
   }
 
@@ -34,6 +36,7 @@ class Api {
         authorization: `${this._settings.headers.authorization}`,
         "Content-Type": "application/json",
       },
+      credentials: 'include',
       body: JSON.stringify({
         name: formValues.name,
         link: formValues.link,
@@ -47,6 +50,7 @@ class Api {
       headers: {
         authorization: `${this._settings.headers.authorization}`,
       },
+      credentials: 'include',
     }).then(this._checkResponse);
   }
 
@@ -57,6 +61,7 @@ class Api {
         authorization: `${this._settings.headers.authorization}`,
         "Content-Type": "application/json",
       },
+      credentials: 'include',
       body: JSON.stringify({
         name: formValues.name,
         about: formValues.about,
@@ -71,6 +76,7 @@ class Api {
         authorization: `${this._settings.headers.authorization}`,
         "Content-Type": "application/json",
       },
+      credentials: 'include',
       body: JSON.stringify({
         avatar: formValues.avatar,
       }),
@@ -84,6 +90,7 @@ class Api {
         authorization: `${this._settings.headers.authorization}`,
         "Content-Type": "application/json",
       },
+      credentials: 'include',
       body: JSON.stringify({
         likes: obj.likes,
       }),
@@ -96,14 +103,14 @@ class Api {
       headers: {
         authorization: `${this._settings.headers.authorization}`,
       },
+      credentials: 'include',
     }).then(this._checkResponse);
   }
 }
 const jwt = localStorage.getItem("jwt");
-//
+
 export const api = new Api({
-  baseUrl: "http://localhost:3001",
-  // baseUrl: "https://mesto.nomoreparties.co/v1/cohort-39",
+  baseUrl: "api.vik163.student.nomoredomains.xyz",
   headers: {
     "Content-Type": "application/json",
     authorization: `Bearer ${jwt}`,
