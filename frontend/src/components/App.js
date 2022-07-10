@@ -109,6 +109,8 @@ function App() {
         if (data.token) {
           localStorage.setItem("jwt", data.token);
           checkToken();
+          console.log(data.user)
+
           setCurrentUser(data.user);
 
           history.push("/");
