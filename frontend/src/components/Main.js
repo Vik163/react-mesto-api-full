@@ -14,7 +14,7 @@ function Main(props) {
   } = props;
 
   const currentUser = React.useContext(CurrentUserContext);
-  console.log(currentUser)
+  console.log(currentUser);
 
   return (
     <main className="content">
