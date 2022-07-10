@@ -109,6 +109,7 @@ function App() {
         if (data.token) {
           localStorage.setItem("jwt", data.token);
           checkToken();
+          setCurrentUser(data.user);
 
           history.push("/");
         }
@@ -123,6 +124,7 @@ function App() {
       id: null,
       email: null,
     });
+    setCurrentUser({})
     history.push("/sign-in");
   }
 
