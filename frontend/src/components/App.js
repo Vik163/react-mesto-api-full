@@ -124,7 +124,6 @@ function App() {
       id: null,
       email: null,
     });
-    setCurrentUser({})
     history.push("/sign-in");
   }
 
