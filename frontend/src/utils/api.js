@@ -109,7 +109,7 @@ class Api {
 }
 const jwt = localStorage.getItem("jwt");
 
-const baseUrl = `${window.location.protocol}${process.env.REACT_APP_API_URL || '//localhost:3000'}`
+const baseUrl = `${window.location.protocol}${process.env.REACT_APP_API_URL || '//localhost:3001'}`
 
 export const api = new Api({
   baseUrl: baseUrl,

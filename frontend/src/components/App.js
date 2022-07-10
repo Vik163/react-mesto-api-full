@@ -70,7 +70,6 @@ function App() {
   }, [loggedIn]);
 
   useEffect(() => {
-    console.log('o');
 
     Promise.all([api.getUserInfo(), api.getInitialCards()])
       .then(([userData, cards]) => {
