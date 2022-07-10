@@ -20,10 +20,12 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
 });
 
 const options = {
-  origin: [
+  domens: [
+    'https://localhost:3000',
     'http://localhost:3000',
-    'https://ваш-домен',
-    'https://your-name-of.github.io',
+    'http://vik163.student.nomoredomains.sbs',
+    'https://vik163.student.nomoredomains.sbs',
+    'https://Vik163.github.io',
   ],
   credentials: true, // эта опция позволяет устанавливать куки
 };
@@ -32,6 +34,32 @@ app.use('*', cors(options));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+// eslint-disable-next-line consistent-return
+app.use((req, res, next) => {
+  const { method } = req;
+  const requestHeaders = req.headers['access-control-request-headers'];
+  const DEFAULT_ALLOWED_METHODS = 'GET,HEAD,PUT,PATCH,POST,DELETE';
+  if (method === 'OPTIONS') {
+    res.header('Access-Control-Allow-Methods', DEFAULT_ALLOWED_METHODS);
+    // разрешаем кросс-доменные запросы с этими заголовками
+    res.header('Access-Control-Allow-Headers', requestHeaders);
+    // завершаем обработку запроса и возвращаем результат клиенту
+    return res.end();
+  }
+
+  next();
+});
+
+app.use((req, res, next) => {
+  const { origin } = req.headers;
+  // проверяем, что источник запроса есть среди разрешённых
+  if (options.domens.includes(origin)) {
+    res.header('Access-Control-Allow-Origin', origin);
+  }
+
+  next();
+});
 
 app.use(requestLogger);
 

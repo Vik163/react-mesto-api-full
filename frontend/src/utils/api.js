@@ -109,8 +109,10 @@ class Api {
 }
 const jwt = localStorage.getItem("jwt");
 
+const baseUrl = `${window.location.protocol}${process.env.REACT_APP_API_URL || '//localhost:3000'}`
+
 export const api = new Api({
-  baseUrl: "api.vik163.student.nomoredomains.xyz",
+  baseUrl: baseUrl,
   headers: {
     "Content-Type": "application/json",
     authorization: `Bearer ${jwt}`,

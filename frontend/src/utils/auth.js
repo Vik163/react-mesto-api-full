@@ -50,9 +50,10 @@ class Auth {
   }
 }
 
+const baseUrl = `${window.location.protocol}${process.env.REACT_APP_API_URL || '//localhost:3000'}`
+
 export const auth = new Auth({
-  baseUrl: "http://localhost:3001",
-  // baseUrl: "https://auth.nomoreparties.co",
+  baseUrl: baseUrl,
   headers: {
     "Content-Type": "application/json",
   },
