@@ -5,11 +5,13 @@ const jwt = require('jsonwebtoken');
 const { NODE_ENV, JWT_SECRET } = process.env;
 
 module.exports = (req, res, next) => {
-  const token = req.cookies.jwt;
-  if (!token) {
+  const { authorization } = req.headers;
+
+  if (!authorization || !authorization.startsWith('Bearer ')) {
     throw new Error('Неправильные почта или пароль');
   }
 
+  const token = authorization.replace('Bearer ', '');
   let payload;
 
   try {

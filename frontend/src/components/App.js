@@ -40,11 +40,11 @@ function App() {
   const [cards, setCards] = useState([]);
 
   const checkToken = () => {
-    const user = localStorage.getItem("user");
+    const jwt = localStorage.getItem("jwt");
 
-    if (user) {
+    if (jwt) {
       auth
-        .checkToken()
+        .checkToken(jwt)
         .then((res) => {
           if (res) {
 
@@ -70,9 +70,9 @@ function App() {
   }, [loggedIn]);
 
   useEffect(() => {
-    const user = localStorage.getItem("user");
+    const jwt = localStorage.getItem("jwt");
 
-    if (user) {
+    if (jwt) {
     Promise.all([api.getUserInfo(), api.getInitialCards()])
       .then(([userData, cards]) => {
         setCurrentUser(userData);
@@ -108,41 +108,29 @@ function App() {
   function handleLogin({ password, email }) {
     return auth
       .authorization(password, email)
-      .then((user) => {
-        if (user) {
-        localStorage.setItem("user", user.email);
-        }
-        return user;
-      })
-      .then((user) => {
-        if (user) {
+      .then((data) => {
+        if (data.token) {
+          localStorage.setItem("jwt", data.token);
           checkToken();
-          setCurrentUser(user);
+          setCurrentUser(data.user);
           api.getInitialCards()
           .then((cards) => {
             setCards(cards);
-
-            history.push("/");
           })
+          history.push("/");
         }
       })
       .catch((err) => console.log(err));
   }
 
   function signOut() {
-    auth.signout()
-    .then((data) => {
-      if (data) {
-          localStorage.removeItem("user");
-          setLoggedIn(false);
-        setLogInfo({
-          id: null,
-          email: null,
-        });
-        history.push("/sign-in");
-      }
-
-    })
+    localStorage.removeItem("jwt");
+    setLoggedIn(false);
+    setLogInfo({
+      id: null,
+      email: null,
+    });
+    history.push("/sign-in");
   }
 
   function handleAddPlaceSubmit(obj, clearInput) {

@@ -51,23 +51,9 @@ module.exports.login = (req, res, next) => {
         NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret',
         { expiresIn: '7d' },
       );
-      res.cookie('jwt', token, {
-        maxAge: 3600000 * 24 * 7,
-        httpOnly: true,
-        sameSite: 'none',
-        secure: true,
-      });
-      res.send(user);
+      res.send({ token, user });
     })
     .catch((err) => next(err));
-};
-
-module.exports.signout = (req, res) => {
-  const token = req.headers.cookies;
-  res.cookie('jwt', token, {
-    maxAge: 0,
-  });
-  res.send({ message: 'Ключ удалён!' });
 };
 
 module.exports.getUsers = (req, res, next) => {

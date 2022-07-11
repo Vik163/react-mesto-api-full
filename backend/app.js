@@ -7,7 +7,7 @@ const cors = require('cors');
 const { celebrate, Joi, errors } = require('celebrate');
 
 const { requestLogger, errorLogger } = require('./middlewares/logger');
-const { createUser, login, signout } = require('./controllers/users');
+const { createUser, login } = require('./controllers/users');
 const auth = require('./middlewares/auth');
 const handleErrors = require('./middlewares/handleErrors');
 
@@ -57,8 +57,6 @@ app.post('/signin', celebrate({
     password: Joi.string().required().min(6),
   }),
 }), login);
-
-app.get('/signout', signout);
 
 app.use(cookieParser());
 app.use(auth);
