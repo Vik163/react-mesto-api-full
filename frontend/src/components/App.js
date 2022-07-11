@@ -92,7 +92,7 @@ function App() {
           setMessageInfoTooltip("Вы успешно зарегистрировались!");
           setIsSign(true);
 
-          history.push("/signin");
+          history.push("/sign-in");
         }
       })
       .catch((err) => {
@@ -117,7 +117,7 @@ function App() {
           api.getInitialCards()
           .then((cards) => {
             setCards(cards);
-            
+
             history.push("/");
           })
         }
@@ -135,7 +135,7 @@ function App() {
           id: null,
           email: null,
         });
-        history.push("/signin");
+        history.push("/sign-in");
       }
 
     })
@@ -257,7 +257,7 @@ function App() {
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
         <Switch>
-          <Route path="/signup">
+          <Route path="/sign-up">
             <InfoTooltip
               sign={isSign}
               isOpen={isAddInfoTooltip}
@@ -266,13 +266,13 @@ function App() {
             />
             <Header
               infoLink="Войти"
-              link="/signin"
+              link="/sign-in"
               signOut={null}
               email={null}
             />
             <Register handleRegister={handleRegister} />
           </Route>
-          <Route path="/signin">
+          <Route path="/sign-in">
             <InfoTooltip
               sign={isSign}
               isOpen={isAddInfoTooltip}
@@ -281,7 +281,7 @@ function App() {
             />
             <Header
               infoLink="Регистрация"
-              link="/signup"
+              link="/sign-up"
               signOut={null}
               email={null}
             />
@@ -292,7 +292,7 @@ function App() {
             <Header
               infoLink="Выйти"
               signOut={signOut}
-              link="/signin"
+              link="/sign-in"
               email={logInfo.email}
             />
             <Main
