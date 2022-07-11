@@ -44,7 +44,7 @@ module.exports.deleteCard = (req, res, next) => {
 
 module.exports.addLike = (req, res, next) => {
   Card.findOneAndUpdate(
-    { _id: req.params.cardId, owner: req.user._id },
+    { _id: req.params.cardId },
     { $addToSet: { likes: req.user._id } }, // добавить _id в массив, если его там нет
     {
       new: true,
@@ -60,7 +60,7 @@ module.exports.addLike = (req, res, next) => {
 
 module.exports.deleteLike = (req, res, next) => {
   Card.findOneAndUpdate(
-    { _id: req.params.cardId, owner: req.user._id },
+    { _id: req.params.cardId },
     { $pull: { likes: req.user._id } }, // убрать _id из массива
     {
       new: true,

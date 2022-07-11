@@ -89,7 +89,7 @@ function App() {
           setMessageInfoTooltip("Вы успешно зарегистрировались!");
           setIsSign(true);
 
-          history.push("/sign-in");
+          history.push("/signin");
         }
       })
       .catch((err) => {
@@ -124,7 +124,7 @@ function App() {
       id: null,
       email: null,
     });
-    history.push("/sign-in");
+    history.push("/signin");
   }
 
   function handleAddPlaceSubmit(obj, clearInput) {
@@ -243,7 +243,7 @@ function App() {
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
         <Switch>
-          <Route path="/sign-up">
+          <Route path="/signup">
             <InfoTooltip
               sign={isSign}
               isOpen={isAddInfoTooltip}
@@ -252,13 +252,13 @@ function App() {
             />
             <Header
               infoLink="Войти"
-              link="/sign-in"
+              link="/signin"
               signOut={null}
               email={null}
             />
             <Register handleRegister={handleRegister} />
           </Route>
-          <Route path="/sign-in">
+          <Route path="/signin">
             <InfoTooltip
               sign={isSign}
               isOpen={isAddInfoTooltip}
@@ -267,7 +267,7 @@ function App() {
             />
             <Header
               infoLink="Регистрация"
-              link="/sign-up"
+              link="/signup"
               signOut={null}
               email={null}
             />
@@ -278,7 +278,7 @@ function App() {
             <Header
               infoLink="Выйти"
               signOut={signOut}
-              link="/sign-in"
+              link="/signin"
               email={logInfo.email}
             />
             <Main

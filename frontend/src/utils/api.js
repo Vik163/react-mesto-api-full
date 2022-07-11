@@ -14,7 +14,7 @@ class Api {
   getUserInfo() {
     return fetch(`${this._settings.baseUrl}/users/me`, {
       headers: {
-        authorization: `${this._settings.headers.authorization}`,
+        authorization: `Bearer ${localStorage.getItem("jwt")}`,
       },
       credentials: 'include',
     }).then(this._checkResponse);
@@ -23,7 +23,7 @@ class Api {
   getInitialCards() {
     return fetch(`${this._settings.baseUrl}/cards`, {
       headers: {
-        authorization: `${this._settings.headers.authorization}`,
+        authorization: `Bearer ${localStorage.getItem("jwt")}`,
       },
       credentials: 'include',
     }).then(this._checkResponse);
@@ -33,7 +33,7 @@ class Api {
     return fetch(`${this._settings.baseUrl}/cards`, {
       method: "POST",
       headers: {
-        authorization: `${this._settings.headers.authorization}`,
+        authorization: `Bearer ${localStorage.getItem("jwt")}`,
         "Content-Type": "application/json",
       },
       credentials: 'include',
@@ -48,7 +48,7 @@ class Api {
     return fetch(`${this._settings.baseUrl}/cards/${obj._id}`, {
       method: "DELETE",
       headers: {
-        authorization: `${this._settings.headers.authorization}`,
+        authorization: `Bearer ${localStorage.getItem("jwt")}`,
       },
       credentials: 'include',
     }).then(this._checkResponse);
@@ -58,7 +58,7 @@ class Api {
     return fetch(`${this._settings.baseUrl}/users/me`, {
       method: "PATCH",
       headers: {
-        authorization: `${this._settings.headers.authorization}`,
+        authorization: `Bearer ${localStorage.getItem("jwt")}`,
         "Content-Type": "application/json",
       },
       credentials: 'include',
@@ -73,7 +73,7 @@ class Api {
     return fetch(`${this._settings.baseUrl}/users/me/avatar`, {
       method: "PATCH",
       headers: {
-        authorization: `${this._settings.headers.authorization}`,
+        authorization: `Bearer ${localStorage.getItem("jwt")}`,
         "Content-Type": "application/json",
       },
       credentials: 'include',
@@ -87,7 +87,7 @@ class Api {
     return fetch(`${this._settings.baseUrl}/cards/${obj._id}/likes`, {
       method: "PUT",
       headers: {
-        authorization: `${this._settings.headers.authorization}`,
+        authorization: `Bearer ${localStorage.getItem("jwt")}`,
         "Content-Type": "application/json",
       },
       credentials: 'include',
@@ -101,13 +101,12 @@ class Api {
     return fetch(`${this._settings.baseUrl}/cards/${obj._id}/likes`, {
       method: "DELETE",
       headers: {
-        authorization: `${this._settings.headers.authorization}`,
+        authorization: `Bearer ${localStorage.getItem("jwt")}`,
       },
       credentials: 'include',
     }).then(this._checkResponse);
   }
 }
-const jwt = localStorage.getItem("jwt");
 
 const baseUrl = `${window.location.protocol}${process.env.REACT_APP_API_URL || '//localhost:3001'}`
 
@@ -115,6 +114,5 @@ export const api = new Api({
   baseUrl: baseUrl,
   headers: {
     "Content-Type": "application/json",
-    authorization: `Bearer ${jwt}`,
   },
 });

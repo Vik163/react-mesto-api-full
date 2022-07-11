@@ -11,7 +11,10 @@ function Card(props) {
     !isOwn && "card__basket_hidden"
   }`;
 
+  // console.log(card.likes)
+  // console.log(currentUser._id)
   const isLiked = card.likes.some((i) => i === currentUser._id);
+  // console.log(isLiked)
   const cardLikeButtonClassName = `card__icon ${
     isLiked && "card__icon_active"
   }`;
