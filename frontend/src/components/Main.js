@@ -14,7 +14,6 @@ function Main(props) {
   } = props;
 
   const currentUser = React.useContext(CurrentUserContext);
-
   return (
     <main className="content">
       <section className="profile content__profile">

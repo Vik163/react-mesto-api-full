@@ -7,7 +7,7 @@ const cors = require('cors');
 const { celebrate, Joi, errors } = require('celebrate');
 
 const { requestLogger, errorLogger } = require('./middlewares/logger');
-const { createUser, login } = require('./controllers/users');
+const { createUser, login, signout } = require('./controllers/users');
 const auth = require('./middlewares/auth');
 const handleErrors = require('./middlewares/handleErrors');
 
@@ -28,7 +28,6 @@ const options = {
     'http://localhost:3000',
     'http://vik163.student.nomoredomains.sbs',
     'https://vik163.student.nomoredomains.sbs',
-    'https://Vik163.github.io',
   ],
   credentials: true, // эта опция позволяет устанавливать куки
 };
@@ -36,6 +35,12 @@ const options = {
 app.use('*', cors(options));
 
 app.use(requestLogger);
+
+app.get('/crash-test', () => {
+  setTimeout(() => {
+    throw new Error('Сервер сейчас упадёт');
+  }, 0);
+});
 
 app.post('/signup', celebrate({
   body: Joi.object().keys({
@@ -52,6 +57,8 @@ app.post('/signin', celebrate({
     password: Joi.string().required().min(6),
   }),
 }), login);
+
+app.get('/signout', signout);
 
 app.use(cookieParser());
 app.use(auth);

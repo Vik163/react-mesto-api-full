@@ -38,12 +38,18 @@ class Auth {
     }).then(this._checkResponse);
   }
 
+  signout() {
+    return fetch(`${this._settings.baseUrl}/signout`, {
+      method: "GET",
+      credentials: 'include',
+    }).then(this._checkResponse);
+  }
+
   checkToken(jwt) {
     return fetch(`${this._settings.baseUrl}/users/me`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        authorization: `Bearer ${jwt}`,
       },
       credentials: 'include',
     }).then(this._checkResponse);

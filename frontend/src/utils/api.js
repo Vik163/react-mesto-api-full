@@ -13,18 +13,12 @@ class Api {
 
   getUserInfo() {
     return fetch(`${this._settings.baseUrl}/users/me`, {
-      headers: {
-        authorization: `Bearer ${localStorage.getItem("jwt")}`,
-      },
       credentials: 'include',
     }).then(this._checkResponse);
   }
 
   getInitialCards() {
     return fetch(`${this._settings.baseUrl}/cards`, {
-      headers: {
-        authorization: `Bearer ${localStorage.getItem("jwt")}`,
-      },
       credentials: 'include',
     }).then(this._checkResponse);
   }
@@ -33,7 +27,6 @@ class Api {
     return fetch(`${this._settings.baseUrl}/cards`, {
       method: "POST",
       headers: {
-        authorization: `Bearer ${localStorage.getItem("jwt")}`,
         "Content-Type": "application/json",
       },
       credentials: 'include',
@@ -47,9 +40,6 @@ class Api {
   deleteCard(obj) {
     return fetch(`${this._settings.baseUrl}/cards/${obj._id}`, {
       method: "DELETE",
-      headers: {
-        authorization: `Bearer ${localStorage.getItem("jwt")}`,
-      },
       credentials: 'include',
     }).then(this._checkResponse);
   }
@@ -58,7 +48,6 @@ class Api {
     return fetch(`${this._settings.baseUrl}/users/me`, {
       method: "PATCH",
       headers: {
-        authorization: `Bearer ${localStorage.getItem("jwt")}`,
         "Content-Type": "application/json",
       },
       credentials: 'include',
@@ -73,7 +62,6 @@ class Api {
     return fetch(`${this._settings.baseUrl}/users/me/avatar`, {
       method: "PATCH",
       headers: {
-        authorization: `Bearer ${localStorage.getItem("jwt")}`,
         "Content-Type": "application/json",
       },
       credentials: 'include',
@@ -87,7 +75,6 @@ class Api {
     return fetch(`${this._settings.baseUrl}/cards/${obj._id}/likes`, {
       method: "PUT",
       headers: {
-        authorization: `Bearer ${localStorage.getItem("jwt")}`,
         "Content-Type": "application/json",
       },
       credentials: 'include',
@@ -100,9 +87,6 @@ class Api {
   deleteLike(obj) {
     return fetch(`${this._settings.baseUrl}/cards/${obj._id}/likes`, {
       method: "DELETE",
-      headers: {
-        authorization: `Bearer ${localStorage.getItem("jwt")}`,
-      },
       credentials: 'include',
     }).then(this._checkResponse);
   }
