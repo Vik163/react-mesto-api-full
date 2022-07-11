@@ -10,7 +10,7 @@
 
 
  сервер - vik163@51.250.26.247
-* [сервер](51.250.26.247)
+ домен - vik163.student.nomoredomains.sbs
 * [Ссылка на страницу](http://vik163.student.nomoredomains.sbs)
 
 
