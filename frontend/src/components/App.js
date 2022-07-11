@@ -110,8 +110,12 @@ function App() {
       .authorization(password, email)
       .then((user) => {
         if (user) {
-          localStorage.setItem("user", user.email);
-
+        localStorage.setItem("user", user.email);
+        }
+        return user;
+      })
+      .then((user) => {
+        if (user) {
           checkToken();
           setCurrentUser(user);
           api.getInitialCards()
