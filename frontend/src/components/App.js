@@ -114,10 +114,13 @@ function App() {
 
           checkToken();
           setCurrentUser(user);
-
+          api.getInitialCards()
+          .then((cards) => {
+            setCards(cards);
+            
+            history.push("/");
+          })
         }
-        history.push("/");
-
       })
       .catch((err) => console.log(err));
   }
