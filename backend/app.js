@@ -10,6 +10,7 @@ const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { createUser, login } = require('./controllers/users');
 const auth = require('./middlewares/auth');
 const handleErrors = require('./middlewares/handleErrors');
+const ErrorNotFound = require('./errors/notFound');
 
 const { PORT = 3001 } = process.env;
 
@@ -64,12 +65,11 @@ app.use(auth);
 app.use('/users', require('./routes/users'));
 app.use('/cards', require('./routes/cards'));
 
-app.use('*', (req, res, next) => {
-  Promise.reject(new Error('Некорректный путь'))
-    .catch((err) => next(err));
-});
-
 app.use(errorLogger);
+
+app.use('*', () => {
+  throw new ErrorNotFound('Маршрут не найден');
+});
 
 app.use(errors());
 app.use(handleErrors);

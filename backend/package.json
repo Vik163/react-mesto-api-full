@@ -25,7 +25,6 @@
     "celebrate": "^15.0.1",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
-    "cripto": "^1.1.4",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
     "express-winston": "^4.2.0",
