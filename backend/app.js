@@ -67,8 +67,8 @@ app.use('/cards', require('./routes/cards'));
 
 app.use(errorLogger);
 
-app.use('*', () => {
-  throw new ErrorNotFound('Маршрут не найден');
+app.use('*', (req, res, next) => {
+  next(new ErrorNotFound('Маршрут не найден'));
 });
 
 app.use(errors());
