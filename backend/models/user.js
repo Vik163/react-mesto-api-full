@@ -37,12 +37,13 @@ const userSchema = new mongoose.Schema({
   password: {
     type: String,
     required: true,
-    select: false,
+    select: false, // Запрещает возвращать пароль
   },
 });
 
+// Собственный метод схемы User. Код проверки почты и пароля ---------
 userSchema.statics.findUserByCredentials = function (email, password) {
-  return this.findOne({ email }).select('+password')
+  return this.findOne({ email }).select('+password') // +password разрешает доступ к паролю
     .then((user) => {
       if (!user) {
         return Promise.reject(new Error('Неправильные почта или пароль'));

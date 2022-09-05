@@ -10,11 +10,12 @@ module.exports = (req, res, next) => {
   if (!authorization || !authorization.startsWith('Bearer ')) {
     throw new Error('Неправильные почта или пароль');
   }
-
+  // Удаляю Bearer ----------------------------------
   const token = authorization.replace('Bearer ', '');
   let payload;
 
   try {
+    // верифицирую токен ----------------------
     payload = jwt.verify(token, NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret');
   } catch (err) {
     next(err);

@@ -1,5 +1,6 @@
 const Card = require('../models/card');
 
+// Добавление ошибки при ненайденной карте
 function addError(res, card) {
   if ((res.statusCode === 200 && !card)) {
     const err = 'error';
@@ -24,13 +25,15 @@ module.exports.createCard = (req, res, next) => {
 };
 
 module.exports.deleteCard = (req, res, next) => {
+  // Для получения ошибки 404
   Card.findOne({ _id: req.params.cardId })
     .then((card) => {
       if (!card) {
         addError(res, card);
       }
+      // Получение ошибки 403
       return Card.findOneAndRemove({ _id: req.params.cardId, owner: req.user._id })
-        .populate('owner')
+        .populate('owner') // Получаю всю информацию об owner
         .then((cardOwnerId) => {
           if (cardOwnerId === null) {
             const err = 'errorOwnerId';

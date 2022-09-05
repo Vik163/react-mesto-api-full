@@ -20,9 +20,11 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
   useNewUrlParser: true,
 });
 
+// Сборка пакетов ----------------------------
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+// Cors Доступ к определенным источникам -----------------
 const options = {
   origin: [
     'https://localhost:3000',
@@ -35,13 +37,10 @@ const options = {
 
 app.use('*', cors(options));
 
+// Сбор логов ---------------------
 app.use(requestLogger);
 
-app.get('/crash-test', () => {
-  setTimeout(() => {
-    throw new Error('Сервер сейчас упадёт');
-  }, 0);
-});
+// Валидация - библиотека celebrate
 
 app.post('/signup', celebrate({
   body: Joi.object().keys({
@@ -60,11 +59,12 @@ app.post('/signin', celebrate({
 }), login);
 
 app.use(cookieParser());
-app.use(auth);
+app.use(auth); // проверка авторизации
 
 app.use('/users', require('./routes/users'));
 app.use('/cards', require('./routes/cards'));
 
+// Обработка ошибок --------------------------------------
 app.use(errorLogger);
 
 app.use('*', (req, res, next) => {
@@ -86,6 +86,7 @@ app.use((err, req, res, next) => {
 
   next();
 });
+// --------------------------------------------------------------
 
 app.listen(PORT, () => {
 });

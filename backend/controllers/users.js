@@ -6,6 +6,7 @@ const { NODE_ENV, JWT_SECRET } = process.env;
 
 const User = require('../models/user');
 
+// Добавление ошибки 404
 function addError(res, user) {
   if ((res.statusCode === 200 && !user)) {
     const err = 'error';
@@ -21,7 +22,7 @@ module.exports.createUser = (req, res, next) => {
     email,
     password,
   } = req.body;
-
+  // Хеширую пароль
   bcrypt.hash(password, 10)
     .then((hash) => User.create({
       name,
@@ -31,6 +32,7 @@ module.exports.createUser = (req, res, next) => {
       password: hash,
     }))
     .then((user) => {
+      // Убираю пароль
       res.send({
         name: user.name,
         about: user.about,
@@ -43,9 +45,10 @@ module.exports.createUser = (req, res, next) => {
 
 module.exports.login = (req, res, next) => {
   const { email, password } = req.body;
-
+  // Собственный метод схемы User. Код проверки почты и пароля
   User.findUserByCredentials(email, password)
     .then((user) => {
+      // Создаю токен на 7 дней, использую localStorage
       const token = jwt.sign(
         { _id: user._id },
         NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret',
@@ -56,12 +59,14 @@ module.exports.login = (req, res, next) => {
     .catch((err) => next(err));
 };
 
+// Получение всех пользователей ------------
 module.exports.getUsers = (req, res, next) => {
   User.find({})
     .then((users) => res.send(users))
     .catch((err) => next(err));
 };
 
+// Получение текущего пользователя ------------
 module.exports.getCurrentUser = (req, res, next) => {
   User.findById(req.user._id)
     .then((user) => {
