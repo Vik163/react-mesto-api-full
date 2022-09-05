@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
 function Login(props) {
   const [infoAuth, setInfoAuth] = useState({
-    email: "",
-    password: "",
+    email: '',
+    password: '',
   });
+
+  // Изменение значений инпутов ---------
   const handleChange = (e) => {
     const { name, value } = e.target;
 
@@ -20,35 +22,35 @@ function Login(props) {
       return;
     }
     props.handleLogin(infoAuth);
-    setInfoAuth({ email: "", password: "" });
+    setInfoAuth({ email: '', password: '' });
   };
 
   return (
-    <div className="register">
-      <h2 className="register__title">Вход</h2>
+    <div className='register'>
+      <h2 className='register__title'>Вход</h2>
 
-      <form className="register__form" onSubmit={handleSubmit}>
+      <form className='register__form' onSubmit={handleSubmit}>
         <input
-          className="register__input register__input_type_email"
-          id="email"
-          type="email"
+          className='register__input register__input_type_email'
+          id='email'
+          type='email'
           onChange={handleChange}
-          value={infoAuth.email ?? ""}
-          placeholder="Email"
-          name="email"
+          value={infoAuth.email ?? ''}
+          placeholder='Email'
+          name='email'
           required
         />
         <input
-          className="register__input register__input_type_password"
-          id="password"
-          type="password"
+          className='register__input register__input_type_password'
+          id='password'
+          type='password'
           onChange={handleChange}
-          value={infoAuth.password ?? ""}
-          placeholder="Пароль"
-          name="password"
+          value={infoAuth.password ?? ''}
+          placeholder='Пароль'
+          name='password'
           required
         />
-        <button className="register__submit button-hover" type="submit">
+        <button className='register__submit button-hover' type='submit'>
           Войти
         </button>
       </form>

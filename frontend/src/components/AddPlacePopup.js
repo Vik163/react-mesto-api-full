@@ -1,18 +1,19 @@
-import React from "react";
-import PopupWithForm from "./PopupWithForm.js";
+import React from 'react';
+import PopupWithForm from './PopupWithForm.js';
 
 function AddPlacePopup(props) {
   const { text, isOpen, onClose, onAddPlace } = props;
 
-  const [cardData, setCardData] = React.useState({ name: "", link: "" });
+  const [cardData, setCardData] = React.useState({ name: '', link: '' });
 
+  // Значение инпута -------------------------
   const handleChangeInput = (event) => {
     const { value, name } = event.target;
     setCardData({ ...cardData, [name]: value });
   };
 
   function clearInput() {
-    setCardData({ name: "", link: "" });
+    setCardData({ name: '', link: '' });
   }
 
   function handleSubmit(e) {
@@ -23,40 +24,40 @@ function AddPlacePopup(props) {
 
   return (
     <PopupWithForm
-      name="cards"
-      title="Новое место"
+      name='cards'
+      title='Новое место'
       text={text}
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
     >
-      <label className="popup__label">
+      <label className='popup__label'>
         <input
-          className="popup__input popup__input_type_title"
-          id="title-input"
-          type="text"
+          className='popup__input popup__input_type_title'
+          id='title-input'
+          type='text'
           onChange={handleChangeInput}
           value={cardData.name}
-          placeholder="Название"
-          name="name"
-          minLength="2"
-          maxLength="30"
+          placeholder='Название'
+          name='name'
+          minLength='2'
+          maxLength='30'
           required
         />
-        <span className="popup__input-error title-input-error"></span>
+        <span className='popup__input-error title-input-error'></span>
       </label>
-      <label className="popup__label">
+      <label className='popup__label'>
         <input
-          className="popup__input popup__input_type_link"
-          id="url-input"
-          type="url"
+          className='popup__input popup__input_type_link'
+          id='url-input'
+          type='url'
           onChange={handleChangeInput}
           value={cardData.link}
-          placeholder="Ссылка на картинку"
-          name="link"
+          placeholder='Ссылка на картинку'
+          name='link'
           required
         />
-        <span className="popup__input-error url-input-error"></span>
+        <span className='popup__input-error url-input-error'></span>
       </label>
     </PopupWithForm>
   );

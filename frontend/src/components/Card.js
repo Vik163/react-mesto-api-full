@@ -1,22 +1,21 @@
-import React from "react";
-import { CurrentUserContext } from "../contexts/CurrentUserContext";
+import React from 'react';
+import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 function Card(props) {
   const { card, onImagePopup, onCardLike, onCardDelete } = props;
 
   const currentUser = React.useContext(CurrentUserContext);
 
+  // Иконка удаления карты ---------------------------------------
   const isOwn = card.owner === currentUser._id;
   const cardDeleteButtonClassName = `card__basket button-hover ${
-    !isOwn && "card__basket_hidden"
+    !isOwn && 'card__basket_hidden'
   }`;
 
-  // console.log(card.likes)
-  // console.log(currentUser._id)
+  // Состояние лайка карты ---------------------------------------
   const isLiked = card.likes.some((i) => i === currentUser._id);
-  // console.log(isLiked)
   const cardLikeButtonClassName = `card__icon ${
-    isLiked && "card__icon_active"
+    isLiked && 'card__icon_active'
   }`;
 
   function handleClick() {
@@ -32,29 +31,29 @@ function Card(props) {
   }
 
   return (
-    <li className="card">
+    <li className='card'>
       <img
-        className="card__image"
+        className='card__image'
         src={card.link}
         alt={card.name}
         onClick={handleClick}
       />
       <button
         className={cardDeleteButtonClassName}
-        type="button"
-        aria-label="basket"
+        type='button'
+        aria-label='basket'
         onClick={handleDeleteClick}
       ></button>
-      <div className="card__info">
-        <h2 className="card__title">{card.name}</h2>
-        <div className="card__likes-info">
+      <div className='card__info'>
+        <h2 className='card__title'>{card.name}</h2>
+        <div className='card__likes-info'>
           <button
             className={cardLikeButtonClassName}
-            type="button"
+            type='button'
             onClick={handleLikeClick}
-            aria-label="like"
+            aria-label='like'
           ></button>
-          <p className="card__likes-num">{card.likes.length}</p>
+          <p className='card__likes-num'>{card.likes.length}</p>
         </div>
       </div>
     </li>

@@ -3,6 +3,7 @@ class Auth {
     this._settings = settings;
   }
 
+  // Проверка полученного ответа -------------------------
   _checkResponse(res) {
     if (res.ok) {
       return res.json();
@@ -12,9 +13,9 @@ class Auth {
 
   registration(password, email) {
     return fetch(`${this._settings.baseUrl}/signup`, {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       credentials: 'include',
       body: JSON.stringify({
@@ -26,9 +27,9 @@ class Auth {
 
   authorization(password, email) {
     return fetch(`${this._settings.baseUrl}/signin`, {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       credentials: 'include',
       body: JSON.stringify({
@@ -40,9 +41,9 @@ class Auth {
 
   checkToken(jwt) {
     return fetch(`${this._settings.baseUrl}/users/me`, {
-      method: "GET",
+      method: 'GET',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
         authorization: `Bearer ${jwt}`,
       },
       credentials: 'include',
@@ -50,11 +51,13 @@ class Auth {
   }
 }
 
-const baseUrl = `${window.location.protocol}${process.env.REACT_APP_API_URL || '//localhost:3001'}`
+const baseUrl = `${window.location.protocol}${
+  process.env.REACT_APP_API_URL || '//localhost:3001'
+}`;
 
 export const auth = new Auth({
   baseUrl: baseUrl,
   headers: {
-    "Content-Type": "application/json",
+    'Content-Type': 'application/json',
   },
 });
